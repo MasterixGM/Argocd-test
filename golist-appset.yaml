@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: golist
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - srv: redis
+        path: apps/redis
+      - srv: mongodb
+        path: apps2/mongo
+      - srv: nginx
+        path: apps2/nginx
+  strategy:
+    type: RollingSync
+    rollingSync:
+      steps:
+        - matchExpressions:
+            - key: golist-component
+              operator: In
+              values:
+                - redis
+        - matchExpressions:
+            - key: golist-component
+              operator: In
+              values:
+                - mongodb
+        - matchExpressions:
+            - key: golist-component
+              operator: In
+              values:
+                - nginx
+  template:
+    metadata:
+      name: '{{srv}}'
+      labels:
+        golist-component: '{{srv}}'
+    spec:
+      project: default
+      source:
+        repoURL: '{{repoURL}}'
+        targetRevision: main
+        path: '{{path}}'
+      destination:
+        name: in-cluster
+        namespace: golist
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            maxDuration: 3m0s
+            factor: 2
+        syncOptions:
+          - CreateNamespace=true
+      ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+            - /spec/replicas
