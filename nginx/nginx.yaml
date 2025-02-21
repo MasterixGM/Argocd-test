@@ -1,3 +1,12 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/dependency: redis
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -5,13 +14,13 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "2"
-    argocd.argoproj.io/dependency: mongodb
+    argocd.argoproj.io/dependency: redis
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/MasterixGM/Argocd-test.git'
-    targetRevision: main
-    path: 'apps2'
+    repoURL: https://github.com/MasterixGM/Argocd-test
+    path: 
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: nginx
@@ -19,5 +28,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
