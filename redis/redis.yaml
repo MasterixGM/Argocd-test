@@ -15,9 +15,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/MasterixGM/Argocd-test
+    repoURL: registry-1.docker.io/bitnamicharts/redis
     path: redis
-    targetRevision: HEAD
+    targetRevision: 7.4.2
   destination:
     server: https://kubernetes.default.svc
     namespace: redis

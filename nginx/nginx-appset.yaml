@@ -9,12 +9,9 @@ spec:
         elements:
           - name: nginx
             path: nginx
-            syncWave: "1"
   template:
     metadata:
       name: '{{name}}'
-      annotations:
-        argocd.argoproj.io/sync-wave: '{{syncWave}}'
     spec:
       project: default
       source:
