@@ -17,7 +17,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/MasterixGM/Argocd-test-apps-appset
+    repoURL: https://github.com/MasterixGM/Argocd-test
     path: apps
     targetRevision: main
   destination:

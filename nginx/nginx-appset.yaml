@@ -15,7 +15,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/MasterixGM/Argocd-test-apps-appset
+        repoURL: https://github.com/MasterixGM/Argocd-test
         path: '{{path}}'
         targetRevision: HEAD
       destination:
