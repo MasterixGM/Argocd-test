@@ -23,7 +23,7 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "3"
-    argocd.argoproj.io/dependency: redis-app
+    argocd.argoproj.io/dependency: redis
 spec:
   project: default
   source:
