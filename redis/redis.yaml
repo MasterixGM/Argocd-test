@@ -15,10 +15,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: registry-1.docker.io/bitnamicharts/redis
-    path: redis
-    targetRevision: 7.4.2
+    chart: redis
+    repoURL: registry-1.docker.io/bitnamicharts
+    targetRevision: 20.9.0
   destination:
     server: https://kubernetes.default.svc
     namespace: redis
-
